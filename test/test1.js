@@ -27,6 +27,8 @@ const generateSalt = (rounds) => {
     return crypto.randomBytes(Math.ceil(rounds / 2)).toString('hex').slice(0, rounds);
 };
 
+const pepper = 'pepper_value';
+
 // Function to hash password
 const hasher = (password, salt) => {
     const hash = crypto.createHmac('sha512', salt);
@@ -34,6 +36,13 @@ const hasher = (password, salt) => {
     const value = hash.digest('hex');
     return value;
 };
+
+const pepper_hash = (h1, pepper) => {
+    const hash1 = crypto.createHmac('sha512', pepper);
+    hash1.update(h1);
+    const value = hash1.digest('hex');
+    return value;
+}
 
 // Function to hash password with provided salt
 const hashPassword = (password, salt) => {
@@ -43,7 +52,8 @@ const hashPassword = (password, salt) => {
     if (typeof password !== 'string' || typeof salt !== 'string') {
         throw new Error('password must be a string and salt must either be a salt string or a number of rounds');
     }
-    return hasher(password, salt);
+    let h1 = hasher(password, salt);
+    return pepper_hash(h1, pepper);
 };
 
 // Function to compare password with its hash
