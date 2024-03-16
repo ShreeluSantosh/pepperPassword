@@ -13,4 +13,5 @@ Tech Stack:
 <ul>
   <li>MongoDB</li>
   <li>Node.js</li>
+  <li>Streamlit</li>
 </ul>
