@@ -1,11 +1,13 @@
-test1.js - 
+<h3>Different Ways to Add Pepper in Hashing: </h3>
+
+1. test1.js - 
 
 uses hash($pepper.hash($salt.$password))
 
-test2.js - 
+2. test2.js - 
 
 uses hash(hash($pepper.$salt).$password))
 
-test3.js - 
+3. test3.js - 
 
-uses hash(hash($pepper).(hash($salt.$password)))
+uses hash(hash($pepper).hash($salt.$password))
