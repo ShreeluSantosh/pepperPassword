@@ -4,7 +4,7 @@ uses hash($pepper.hash($salt.$password))
 
 test2.js - 
 
-uses hash($pepper.$salt.$password))
+uses hash(hash($pepper.$salt).$password))
 
 test3.js - 
 
