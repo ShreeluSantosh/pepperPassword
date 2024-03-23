@@ -1,17 +1,16 @@
 'use strict';
 const crypto = require('crypto');
-const readline = require('readline');
+const express = require('express');
 const { MongoClient } = require('mongodb');
 
 // MongoDB connection URI
 const uri = 'connection_string';
 const client = new MongoClient(uri);
 
-// Function to create readline interface
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const app = express();
+const port = 3000;
+
+app.use(express.json());
 
 // Function to generate salt
 const generateSalt = (rounds) => {
@@ -68,75 +67,82 @@ const comparePasswords = async (password, hashedPasswords) => {
     return false; // No match found
 };
 
-// Function to handle user input for username and password
-const getUserInput = () => {
-    return new Promise((resolve, reject) => {
-        rl.question('Are you a new user? (yes/no): ', (isNewUser) => {
-            if (isNewUser.toLowerCase() === 'yes') {
-                rl.question('Enter username: ', (username) => {
-                    rl.question('Enter password: ', (password) => {
-                        rl.close();
-                        resolve({ isNewUser: true, username, password });
-                    });
-                });
-            } else if (isNewUser.toLowerCase() === 'no') {
-                rl.question('Enter username: ', (username) => {
-                    rl.question('Enter password: ', (password) => {
-                        rl.close();
-                        resolve({ isNewUser: false, username, password });
-                    });
-                });
-            } else {
-                rl.close();
-                reject(new Error('Invalid input'));
-            }
-        });
-    });
-};
-
-// Main function to execute the hashing and comparison
-const main = async () => {
+// Connect to MongoDB
+const connectToMongoDB = async () => {
     try {
-        // Connect to MongoDB
         await client.connect();
         console.log('Connected to MongoDB');
+    } catch (error) {
+        console.error('Error connecting to MongoDB:', error);
+    }
+};
 
-        // Get user input
-        const userInput = await getUserInput();
-        const { isNewUser, username, password } = userInput;
+// Express endpoint for signup
+app.post('/signup', async (req, res) => {
+    try {
+        const { username, password } = req.body;
 
         // Access the 'users' collection in MongoDB
         const database = client.db('test');
         const collection = database.collection('user_credentials');
 
-        if (isNewUser) {
-            // Generate salt and hash password for new user
-            const salt = generateSalt(12);
-            const hashedPassword = hashPassword(password, salt);
-
-            // Insert new user data into MongoDB
-            await collection.insertOne({
-                username: username,
-                hashedpassword: hashedPassword,
-                salt: salt
-            });
-            console.log('User data inserted into database');
-        } else {
-            // Retrieve all hashed passwords from MongoDB
-            const hashedPasswords = await collection.find({}, { projection: { hashedpassword: 1, salt: 1 } }).toArray();
-
-            // Compare inputted password with hashed passwords from the database
-            const isMatch = await comparePasswords(password, hashedPasswords);
-            console.log('Password Match:', isMatch);
+        // Check if user already exists
+        const existingUser = await collection.findOne({ username: username });
+        if (existingUser) {
+            return res.status(400).json({ message: 'User already exists' });
         }
+
+        // Generate salt and hash password for new user
+        const salt = generateSalt(12);
+        const hashedPassword = hashPassword(password, salt, 'pepper_value');
+
+        // Insert new user data into MongoDB
+        await collection.insertOne({
+            username: username,
+            hashedpassword: hashedPassword,
+            salt: salt
+        });
+
+        res.status(201).json({ message: 'User signed up successfully' });
     } catch (error) {
-        console.error('Error:', error.message);
-    } finally {
-        // Close MongoDB connection
-        await client.close();
-        console.log('Disconnected from MongoDB');
+        console.error('Error signing up user:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
+});
+
+app.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        // Access the 'users' collection in MongoDB
+        const database = client.db('test');
+        const collection = database.collection('user_credentials');
+
+        // Find user by username
+        const user = await collection.findOne({ username: username });
+        if (!user) {
+            return res.status(401).json({ message: 'User not found' });
+        }
+
+        // Compare inputted password with hashed password from the database
+        const hashedPassword = hashPassword(password, user.salt, 'pepper_value');
+        if (hashedPassword !== user.hashedpassword) {
+            return res.status(401).json({ message: 'Incorrect password' });
+        }
+
+        res.status(200).json({ message: 'Login successful' });
+    } catch (error) {
+        console.error('Error logging in user:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+// Start the Express server
+const startServer = () => {
+    app.listen(port, () => {
+        console.log(`Server is running on http://localhost:${port}`);
+    });
 };
 
-// Execute main function
-main();
+// Initialize MongoDB connection and start the server
+connectToMongoDB().then(startServer);
