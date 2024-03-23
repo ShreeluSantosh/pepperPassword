@@ -12,6 +12,7 @@ Tech Stack:
 
 <ul>
   <li>MongoDB</li>
+  <li>Express.js</li>
   <li>Node.js</li>
   <li>Streamlit</li>
 </ul>
