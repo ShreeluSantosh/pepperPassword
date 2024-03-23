@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Set backend API endpoint URL
-backend_url = 'api_endpoint'  
+backend_url = 'http://localhost:3000/login'  
 
 # Set page config
 st.set_page_config(page_title="pepperPassword | Sign up", page_icon="🌶️")
