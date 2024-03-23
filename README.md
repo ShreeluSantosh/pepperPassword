@@ -5,7 +5,7 @@ This is a work-in-progress salting and peppering approach to securing passwords 
 <ul>
   <li>Experimenting with storing pepper in various secure locations outside of database and application code</li>
   <li>Trying out various ways to hash pepper with the password</li>
-  <li>Implementing a pepper rotation scheme, without having to go over the tedious task of having to ask the user to use a new password, or rehash everyone's passwords in one go. The rotation is proposed to takje place every 90 days.</li>
+  <li>Implementing a pepper rotation scheme, without having to go over the tedious task of having to ask the user to use a new password, or rehash everyone's passwords in one go. The rotation is proposed to take place every 90 days.</li>
 </ul>
 
 Tech Stack:
