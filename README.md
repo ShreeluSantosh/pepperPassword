@@ -17,7 +17,7 @@ The following approach is being explored:
   <li><a href="#techstack">Tech Stack</a></li>
   <li><a href="#hash">Hashing Pepper into Password Hash</a></li>
   <li><a href="#rotation">Pepper Rotation Scheme</a></li>
-  <li><a href="screenshots">Screenshots from Work</a></li>
+  <li><a href="#screenshots">Screenshots from Work</a></li>
 </ul>
 
 <h3 id="techstack">Tech Stack:</h3>
