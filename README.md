@@ -9,7 +9,18 @@ The following approach is being explored:
   <li>Implementing a pepper rotation scheme, without having to go over the tedious task of having to ask the user to use a new password, or rehash everyone's passwords in one go. The rotation is proposed to take place every 90 days.</li>
 </ul>
 
-Tech Stack:
+<hr>
+
+<h2>Table of Contents:</h2>
+
+<ul>
+  <li><a href="#techstack">Tech Stack</a></li>
+  <li><a>Hashing Pepper into Password Hash</a></li>
+  <li><a>Pepper Rotation Scheme</a></li>
+  <li><a>Screenshots from Work</a></li>
+</ul>
+
+<h3 id="techstack">Tech Stack:</h3>
 
 <ul>
   <li>MongoDB</li>
@@ -18,11 +29,15 @@ Tech Stack:
   <li>Streamlit</li>
 </ul>
 
-Proposed way to hash pepper with the salt and password:
+<h3>Proposed way to hash pepper with the salt and password:</h3>
 
 ```Hashed_password = hash(hash($pepper).hash($salt.$password))```
 
-Screenshots from the work:
+<h2>Pepper Rotation Scheme</h2>
+
+
+
+<h2>Screenshots from the work:</h2>
 
 ![image](https://github.com/ShreeluSantosh/pepperPassword/assets/94289402/eb890ec3-3262-4bdd-b0fc-ea6ae86151af)
 
