@@ -15,9 +15,9 @@ The following approach is being explored:
 
 <ul>
   <li><a href="#techstack">Tech Stack</a></li>
-  <li><a>Hashing Pepper into Password Hash</a></li>
-  <li><a>Pepper Rotation Scheme</a></li>
-  <li><a>Screenshots from Work</a></li>
+  <li><a href="#hash">Hashing Pepper into Password Hash</a></li>
+  <li><a href="#rotation">Pepper Rotation Scheme</a></li>
+  <li><a href="screenshots">Screenshots from Work</a></li>
 </ul>
 
 <h3 id="techstack">Tech Stack:</h3>
@@ -29,15 +29,15 @@ The following approach is being explored:
   <li>Streamlit</li>
 </ul>
 
-<h3>Proposed way to hash pepper with the salt and password:</h3>
+<h3 id="hash">Proposed way to hash pepper with the salt and password:</h3>
 
 ```Hashed_password = hash(hash($pepper).hash($salt.$password))```
 
-<h2>Pepper Rotation Scheme</h2>
+<h3 id="rotation">Pepper Rotation Scheme</h3>
 
 
 
-<h2>Screenshots from the work:</h2>
+<h3 id="screenshots">Screenshots from the work:</h3>
 
 ![image](https://github.com/ShreeluSantosh/pepperPassword/assets/94289402/eb890ec3-3262-4bdd-b0fc-ea6ae86151af)
 
