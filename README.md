@@ -9,8 +9,6 @@ The following approach is being explored:
   <li>Implementing a pepper rotation scheme, without having to go over the tedious task of having to ask the user to use a new password, or rehash everyone's passwords in one go. The rotation is proposed to take place every 90 days.</li>
 </ul>
 
-<hr>
-
 <h2>Table of Contents:</h2>
 
 <ul>
@@ -19,6 +17,8 @@ The following approach is being explored:
   <li><a href="#rotation">Pepper Rotation Scheme</a></li>
   <li><a href="#screenshots">Screenshots from Work</a></li>
 </ul>
+
+<hr>
 
 <h3 id="techstack">Tech Stack:</h3>
 
@@ -35,7 +35,18 @@ The following approach is being explored:
 
 <h3 id="rotation">Pepper Rotation Scheme</h3>
 
+Most password policies specify that passwords need to be changed every 30, 60, or 90 days. This can be tedious for the following reasons:
 
+<ol>
+  <li>Difficult for users to remember and commit the new password to memory</li>
+  <li>Can slow down the operations of the organization or systems.</li>
+</ol>
+
+So, reminding the user to provide new password at the end of every window is not effective. Thus, we need a new way to make sure the hashed passwords updated regularly.
+
+One way to keep the password database updated is to rehash everyone's passwords with new pepper value. But hashing is one-way function, and this means that we cannot get password from the hashes stored in the database. This measn that there is only one way to get passwords for rehashing - taking the user input password.
+
+We can utilize this by setting a timer for pepper value to change. Every time the timer is up, the pepper value is updated. From there, we can simply take input password, and rehash it using the salt already stored in the database, along with the new pepper value. Then the new hashed password is stored in place of old hash in the database.
 
 <h3 id="screenshots">Screenshots from the work:</h3>
 
