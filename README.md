@@ -48,6 +48,16 @@ One way to keep the password database updated is to rehash everyone's passwords 
 
 We can utilize this by setting a timer for pepper value to change. Every time the timer is up, the pepper value is updated. From there, we can simply take input password, and rehash it using the salt already stored in the database, along with the new pepper value. Then the new hashed password is stored in place of old hash in the database.
 
+The proposed approach to pepper rotation scheme is:
+
+<ol>
+  <li>Set timer to desired value (say, 90 days).</li>
+  <li>Each time the timer is up, the pepper is updated with new value.</li>
+  <li>Then, each time a user logs in, the last password update date (or account signup date for new users) is checked.</li>
+  <li>If the password update date is before the pepper update date, then, after verifying the input password, the password is rehashed with stored salt and new pepper.</li>
+  <li>The rehashed password is stored in the database, along with the new password upate date.</li>
+</ol>
+
 <h3 id="screenshots">Screenshots from the work:</h3>
 
 ![image](https://github.com/ShreeluSantosh/pepperPassword/assets/94289402/eb890ec3-3262-4bdd-b0fc-ea6ae86151af)
