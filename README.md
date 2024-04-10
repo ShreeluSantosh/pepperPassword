@@ -27,6 +27,11 @@ The following approach is being explored:
   <li>Express.js</li>
   <li>Node.js</li>
   <li>Streamlit</li>
+  <li>Cryptography</li>
+  <ol>
+    <li>Hashing</li>
+    <li>Libraries: crypto Node.js dependency</li>
+  </ol>
 </ul>
 
 <h3 id="hash">Proposed way to hash pepper with the salt and password:</h3>
