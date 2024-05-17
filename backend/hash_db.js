@@ -4,7 +4,7 @@ const express = require('express');
 const { MongoClient } = require('mongodb');
 
 // MongoDB connection URI
-const uri = 'connection_string';
+const uri = 'mongodb+srv://shreelusantosh0296:2A8bc9ws@cluster0.yzegwx0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'';
 const client = new MongoClient(uri);
 
 const app = express();
