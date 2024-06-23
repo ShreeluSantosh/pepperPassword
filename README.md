@@ -65,8 +65,10 @@ The proposed approach to pepper rotation scheme is:
 
 <h3 id="screenshots">Screenshots from the work:</h3>
 
-![image](https://github.com/ShreeluSantosh/pepperPassword/assets/94289402/eb890ec3-3262-4bdd-b0fc-ea6ae86151af)
+![image](https://github.com/ShreeluSantosh/pepperPassword/assets/94289402/d5e60d62-334f-4943-865b-2e8eacb860d2)
 
-![image](https://github.com/ShreeluSantosh/pepperPassword/assets/94289402/b27ce45e-a082-47f1-9748-fdde58864a37)
+![image](https://github.com/ShreeluSantosh/pepperPassword/assets/94289402/f5ffa2a7-8832-4221-8d3d-5528fdde3266)
 
-![image](https://github.com/ShreeluSantosh/pepperPassword/assets/94289402/b66c35ad-3f05-4589-95f8-250ed82279a1)
+![image](https://github.com/ShreeluSantosh/pepperPassword/assets/94289402/e66181a3-a204-4adf-b982-b884e2982a86)
+
+![image](https://github.com/ShreeluSantosh/pepperPassword/assets/94289402/ee921ee3-d65b-4857-afc4-f94f40777e36)
